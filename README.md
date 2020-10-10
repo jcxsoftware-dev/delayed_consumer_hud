@@ -1,6 +1,6 @@
 # delayed_consumer_hud
 
-A new Flutter package project.
+A HUD that comes with two key features, the ability to delay showing the HUD and using a provider to determine when to show the HUD.
 
 ## Getting Started
 
