@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     widget.testViewModel.isBusy = true;
 
-    Future<void>.delayed(Duration(seconds: 5)).then((value) {
+    Future<void>.delayed(Duration(seconds: 2)).then((value) {
       setState(() {
         // This call to setState tells the Flutter framework that something has
         // changed in this State, which causes it to rerun the build method below
