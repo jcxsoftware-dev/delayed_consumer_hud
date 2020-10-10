@@ -45,7 +45,39 @@ class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
   }
 }
 
+/// Most basic delayed start HUD. It does not use a provider to trigger the HUD.
+/// You must provide the value to when it should be shown.
+///
+/// ```
+/// var isBusy = true;
+///
+/// DelayedHud(
+///   hud: CircularProgressIndicator(),
+///   child: Text('DelayedHud'),
+///   showHud: () => _isBusy, // Update this variable when you want to show/hide the HUD
+/// )
+///
+/// ```
+///
+/// Show a hud with 1s delay and no provider.
+/// When you set the variable isBusy to true, the timer will start and once the timer reaches 1s, it will show the HUD.
+/// If you change the value of isBusy before 1s, the timer will be canceled.
+///
+///
+/// ```
+///
+/// var isBusy = true;
+///
+/// DelayedHud(
+///   hud: CircularProgressIndicator(),
+///   child: Text('DelayedHud'),
+///   delayedStart: Duration(seconds: 1),
+///   showHud: () => _isBusy, // Update this variable when you want to show/hide the HUD
+/// )
+///
+/// ```
 class DelayedHud extends StatefulWidget {
+  /// Constructor, only the child attribute is required.
   DelayedHud(
       {Key key,
       this.child,
@@ -56,12 +88,30 @@ class DelayedHud extends StatefulWidget {
       this.showHud})
       : super(key: key);
 
+  /// Widget that will be rendered by the HUD.
+  /// Ideally this widget is a scaffold so when the HUD is rendered it covers the entire screen.
   @required
   final Widget child;
+
+  /// This is the color used to cover the screen in between the child and the HUD control.
+  /// If you don't specify this value, a translucent black color will be used.
   final Color color;
+
+  /// Widget that is rendered when a HUD needs to be displayed.
+  /// Typically this would be a CircularProgressIndicator()
   final Widget hud;
+
+  /// Duration that the HUD will wait before you show it.
+  /// If null, it starts automatically. Ideally, consider a duration of 250ms.
   final Duration delayedStart;
+
+  /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
+  /// The timer will trigger showing the HUD widget.
   final bool Function() showHud;
+
+  /// This is an alternative to the hud attribute.
+  /// This is a callback that lets you generate a Widget using the various providers used.
+  /// This gives you additional context in case the HUD is context aware.
   final Widget Function() hudWidget;
 
   @override
@@ -97,7 +147,20 @@ class _DelayedHudState extends _DelayedHudBaseState<DelayedHud> {
   }
 }
 
+/// In the following example, we will use a ChangeNotificationProvider to trigger showing the HUD. It is also using a delayed start.
+/// When the provider changes values, the callback showHud will be called and the provider will be passed to this function. You can then check its value to determine if you need to show the HUD.
+/// ```
+/// DelayedHud1<TestViewModel>(
+///   hud: hud,
+///   child: Text('DelayedHud1<TestViewModel>'),
+///   delayedStart: delay,
+///   showHud: (viewModel) {
+///     return viewModel.isBusy;
+///   },
+/// )
+/// ```
 class DelayedHud1<T1> extends StatefulWidget {
+  /// Constructor, only the child attribute is required.
   DelayedHud1(
       {Key key,
       this.child,
@@ -108,12 +171,30 @@ class DelayedHud1<T1> extends StatefulWidget {
       this.showHud})
       : super(key: key);
 
+  /// Widget that will be rendered by the HUD.
+  /// Ideally this widget is a scaffold so when the HUD is rendered it covers the entire screen.
   @required
   final Widget child;
+
+  /// This is the color used to cover the screen in between the child and the HUD control.
+  /// If you don't specify this value, a translucent black color will be used.
   final Color color;
+
+  /// Widget that is rendered when a HUD needs to be displayed.
+  /// Typically this would be a CircularProgressIndicator()
   final Widget hud;
+
+  /// Duration that the HUD will wait before you show it.
+  /// If null, it starts automatically. Ideally, consider a duration of 250ms.
   final Duration delayedStart;
+
+  /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
+  /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
   final bool Function(T1 value1) showHud;
+
+  /// This is an alternative to the hud attribute.
+  /// This is a callback that lets you generate a Widget using the various providers used.
+  /// This gives you additional context in case the HUD is context aware.
   final Widget Function(T1 value1) hudWidget;
 
   bool _showHudProxy(
@@ -173,7 +254,21 @@ class _DelayedHudState1<T1> extends _DelayedHudBaseState<DelayedHud1> {
   }
 }
 
+/// In the following example, we will use a ChangeNotificationProvider to trigger showing the HUD. It is also using a delayed start.
+/// When one of the providers change values, the callback showHud will be called and the providers will be passed to this function.
+/// You can then check its value to determine if you need to show the HUD.
+/// ```
+/// DelayedHud1<TestViewModel>(
+///   hud: hud,
+///   child: Text('DelayedHud1<TestViewModel, AnotherViewModel>'),
+///   delayedStart: delay,
+///   showHud: (viewModel1, viewModel2) {
+///     return viewModel.isBusy || viewModel2.isSaving;
+///   },
+/// )
+/// ```
 class DelayedHud2<T1, T2> extends StatefulWidget {
+  /// Constructor, only the child attribute is required.
   DelayedHud2(
       {Key key,
       this.child,
@@ -184,12 +279,30 @@ class DelayedHud2<T1, T2> extends StatefulWidget {
       this.showHud})
       : super(key: key);
 
+  /// Widget that will be rendered by the HUD.
+  /// Ideally this widget is a scaffold so when the HUD is rendered it covers the entire screen.
   @required
   final Widget child;
+
+  /// This is the color used to cover the screen in between the child and the HUD control.
+  /// If you don't specify this value, a translucent black color will be used.
   final Color color;
+
+  /// Widget that is rendered when a HUD needs to be displayed.
+  /// Typically this would be a CircularProgressIndicator()
   final Widget hud;
+
+  /// Duration that the HUD will wait before you show it.
+  /// If null, it starts automatically. Ideally, consider a duration of 250ms.
   final Duration delayedStart;
-  final bool Function(T1, T2) showHud;
+
+  /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
+  /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
+  final bool Function(T1 value1, T2 value2) showHud;
+
+  /// This is an alternative to the hud attribute.
+  /// This is a callback that lets you generate a Widget using the various providers used.
+  /// This gives you additional context in case the HUD is context aware.
   final Widget Function(T1 value1, T2 value2) hudWidget;
 
   bool _showHudProxy(dynamic value1, dynamic value2) {
@@ -246,7 +359,21 @@ class _DelayedHudState2<T1, T2> extends _DelayedHudBaseState<DelayedHud2> {
   }
 }
 
+/// In the following example, we will use a ChangeNotificationProvider to trigger showing the HUD. It is also using a delayed start.
+/// When one of the providers change values, the callback showHud will be called and the providers will be passed to this function.
+/// You can then check its value to determine if you need to show the HUD.
+/// ```
+/// DelayedHud1<TestViewModel>(
+///   hud: hud,
+///   child: Text('DelayedHud1<TestViewModel, AnotherViewModel, YetAnotherViewModel>'),
+///   delayedStart: delay,
+///   showHud: (viewModel1, viewModel2, viewModel3) {
+///     return viewModel.isBusy || viewModel2.isSaving || viewModel3.isProcessing;
+///   },
+/// )
+/// ```
 class DelayedHud3<T1, T2, T3> extends StatefulWidget {
+  /// Constructor, only the child attribute is required.
   DelayedHud3(
       {Key key,
       this.child,
@@ -257,12 +384,30 @@ class DelayedHud3<T1, T2, T3> extends StatefulWidget {
       this.showHud})
       : super(key: key);
 
+  /// Widget that will be rendered by the HUD.
+  /// Ideally this widget is a scaffold so when the HUD is rendered it covers the entire screen.
   @required
   final Widget child;
+
+  /// This is the color used to cover the screen in between the child and the HUD control.
+  /// If you don't specify this value, a translucent black color will be used.
   final Color color;
+
+  /// Widget that is rendered when a HUD needs to be displayed.
+  /// Typically this would be a CircularProgressIndicator()
   final Widget hud;
+
+  /// Duration that the HUD will wait before you show it.
+  /// If null, it starts automatically. Ideally, consider a duration of 250ms.
   final Duration delayedStart;
+
+  /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
+  /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
   final bool Function(T1 value1, T2 value2, T3 value3) showHud;
+
+  /// This is an alternative to the hud attribute.
+  /// This is a callback that lets you generate a Widget using the various providers used.
+  /// This gives you additional context in case the HUD is context aware.
   final Widget Function(T1 value1, T2 value2, T3 value3) hudWidget;
 
   bool _showHudProxy(dynamic value1, dynamic value2, dynamic value3) {
