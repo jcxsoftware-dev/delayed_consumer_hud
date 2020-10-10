@@ -1,6 +1,7 @@
 # 0.1.2
 
 * Make pubspec.yaml description less than 180 chars.
+* Add demo video in README.md
 
 # 0.1.1
 
