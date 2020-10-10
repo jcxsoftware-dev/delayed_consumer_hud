@@ -38,7 +38,7 @@ class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
 
   Widget _showHudWidget(Widget hud, Color color) {
     return Container(
-        color: color,
+        color: color ?? Color.fromARGB(200, 0, 0, 0),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Center(child: hud));
