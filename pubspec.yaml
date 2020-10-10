@@ -1,7 +1,6 @@
 name: delayed_consumer_hud
 description: HUD with delayed start using a provider as trigger
 version: 0.1.0
-author: Juan C. Rivera
 homepage: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 repository: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 issue_tracker: https://github.com/jcxsoftware-dev/delayed_consumer_hud/issues
