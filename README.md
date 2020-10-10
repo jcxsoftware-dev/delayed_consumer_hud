@@ -57,6 +57,41 @@ DelayedHud1<TestViewModel>(
 
 There are three versions of DelayedHud + Provider to allow you to pass 1 to 3 providers to the HUD. Similar to how Consumers work.
 
+```
+
+DelayedHud2<TestViewModel, AnotherViewModel>(
+  hud: hud,
+  child: Text('Test'),
+  delayedStart: delay,
+  showHud: (TestViewModel testViewModel, AnotherViewModel anotherViewModel) {
+    return testViewModel.isBusy || anotherViewModel.isSaving;
+  },
+)
+
+
+```
+
+## Customizations
+
+Instead of using a simple Widget for the HUD, you have the alternative to return a Widget using the values of the providers passed to the control.
+
+Instead of using hud property, use the hudWidget callback. This callback gets called when the HUD control needs to be rendered and the providers are passed as arguments. This will give you greater control on what to show.
+
+```
+
+DelayedHud1<TestViewModel>(
+  child: Text('DelayedHud1<TestViewModel>'),
+  delayedStart: delay,
+  showHud: (viewModel) {
+    return viewModel.isBusy;
+  },
+  hudWidget: (viewModel) {
+    return Text(viewModel.label);
+  }
+)
+
+```
+
 ## Performance
 
 One key design characteristic of this implementation is that changes to the provider would not trigger a redraw of the HUD's child widget. We use a stack and the only HUD is wrapped with a consumer.
