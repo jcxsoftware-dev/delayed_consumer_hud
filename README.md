@@ -1,4 +1,4 @@
-# HUD + Delayed + Provider
+# HUD with delayed start and provider tigger
 
 A HUD that comes with two key features, the ability to delay showing the HUD and using a provider to determine when to show the HUD.
 
