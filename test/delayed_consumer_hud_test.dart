@@ -178,7 +178,7 @@ void main() {
     final delay = Duration(seconds: 1);
 
     var testViewModel1 = TestViewModel();
-    var testViewModel2 = TestViewModel();
+    var testViewModel2 = AnotherViewModel();
 
     await tester.pumpWidget(
       MediaQuery(
@@ -187,18 +187,18 @@ void main() {
             providers: [
               ChangeNotifierProvider<TestViewModel>.value(
                   value: testViewModel1),
-              ChangeNotifierProvider<TestViewModel>.value(
+              ChangeNotifierProvider<AnotherViewModel>.value(
                   value: testViewModel2),
             ],
             builder: (context, child) {
               return Directionality(
                 textDirection: TextDirection.ltr,
-                child: DelayedHud2<TestViewModel, TestViewModel>(
+                child: DelayedHud2<TestViewModel, AnotherViewModel>(
                   hud: hud,
                   child: Text('DelayedHud2<TestViewModel, TestViewModel>'),
                   delayedStart: delay,
                   showHud: (viewModel1, viewModel2) {
-                    return viewModel1.isBusy || viewModel2.isBusy;
+                    return viewModel1.isBusy || viewModel2.isSaving;
                   },
                 ),
               );
@@ -226,7 +226,7 @@ void main() {
 
     expect(find.byKey(key), findsNothing);
 
-    testViewModel2.isBusy = true;
+    testViewModel2.isSaving = true;
 
     await tester.pump();
 
@@ -236,7 +236,7 @@ void main() {
 
     expect(find.byKey(key), findsOneWidget);
 
-    testViewModel2.isBusy = false;
+    testViewModel2.isSaving = false;
 
     await tester.pump();
 
@@ -251,8 +251,8 @@ void main() {
     final delay = Duration(seconds: 1);
 
     var testViewModel1 = TestViewModel();
-    var testViewModel2 = TestViewModel();
-    var testViewModel3 = TestViewModel();
+    var testViewModel2 = AnotherViewModel();
+    var testViewModel3 = YetAnotherViewModel();
 
     await tester.pumpWidget(
       MediaQuery(
@@ -261,20 +261,23 @@ void main() {
             providers: [
               ChangeNotifierProvider<TestViewModel>.value(
                   value: testViewModel1),
-              ChangeNotifierProvider<TestViewModel>.value(
+              ChangeNotifierProvider<AnotherViewModel>.value(
                   value: testViewModel2),
-              ChangeNotifierProvider<TestViewModel>.value(
+              ChangeNotifierProvider<YetAnotherViewModel>.value(
                   value: testViewModel3),
             ],
             builder: (context, child) {
               return Directionality(
                 textDirection: TextDirection.ltr,
-                child: DelayedHud2<TestViewModel, TestViewModel>(
+                child: DelayedHud3<TestViewModel, AnotherViewModel,
+                    YetAnotherViewModel>(
                   hud: hud,
                   child: Text('DelayedHud2<TestViewModel, TestViewModel>'),
                   delayedStart: delay,
-                  showHud: (viewModel1, viewModel2) {
-                    return viewModel1.isBusy || viewModel2.isBusy;
+                  showHud: (viewModel1, viewModel2, viewModel3) {
+                    return viewModel1.isBusy ||
+                        viewModel2.isSaving ||
+                        viewModel3.isProcessing;
                   },
                 ),
               );
@@ -302,7 +305,7 @@ void main() {
 
     expect(find.byKey(key), findsNothing);
 
-    testViewModel2.isBusy = true;
+    testViewModel2.isSaving = true;
 
     await tester.pump();
 
@@ -312,13 +315,13 @@ void main() {
 
     expect(find.byKey(key), findsOneWidget);
 
-    testViewModel2.isBusy = false;
+    testViewModel2.isSaving = false;
 
     await tester.pump();
 
     expect(find.byKey(key), findsNothing);
 
-    testViewModel3.isBusy = true;
+    testViewModel3.isProcessing = true;
 
     await tester.pump();
 
@@ -328,7 +331,7 @@ void main() {
 
     expect(find.byKey(key), findsOneWidget);
 
-    testViewModel3.isBusy = false;
+    testViewModel3.isProcessing = false;
 
     await tester.pump();
 
@@ -347,8 +350,30 @@ class TestViewModel extends ChangeNotifier {
   bool get isBusy {
     return _isBusy;
   }
+}
 
-  bool get isNotBusy {
-    return !_isBusy;
+class AnotherViewModel extends ChangeNotifier {
+  bool _isSaving = false;
+
+  set isSaving(bool value) {
+    _isSaving = value;
+    notifyListeners();
+  }
+
+  bool get isSaving {
+    return _isSaving;
+  }
+}
+
+class YetAnotherViewModel extends ChangeNotifier {
+  bool _isProcessing = false;
+
+  set isProcessing(bool value) {
+    _isProcessing = value;
+    notifyListeners();
+  }
+
+  bool get isProcessing {
+    return _isProcessing;
   }
 }
