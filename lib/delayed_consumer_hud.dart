@@ -119,6 +119,7 @@ class DelayedHud extends StatefulWidget {
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget.
+  @required
   final bool Function() showHud;
 
   /// This is an alternative to the hud attribute.
@@ -202,6 +203,7 @@ class DelayedHud1<T1> extends StatefulWidget {
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
+  @required
   final bool Function(T1 value1) showHud;
 
   /// This is an alternative to the hud attribute.
@@ -310,6 +312,7 @@ class DelayedHud2<T1, T2> extends StatefulWidget {
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
+  @required
   final bool Function(T1 value1, T2 value2) showHud;
 
   /// This is an alternative to the hud attribute.
@@ -415,6 +418,7 @@ class DelayedHud3<T1, T2, T3> extends StatefulWidget {
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
+  @required
   final bool Function(T1 value1, T2 value2, T3 value3) showHud;
 
   /// This is an alternative to the hud attribute.
