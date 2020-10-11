@@ -37,6 +37,18 @@ class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
   }
 
   Widget _showHudWidget(Widget hud, Color color) {
+    // If hud is not defined, use a container with a circular progress indicator
+    if (hud == null) {
+      hud = Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(200, 255, 255, 255),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Padding(
+            padding: EdgeInsets.all(35), child: CircularProgressIndicator()),
+      );
+    }
+
     return Container(
         color: color ?? Color.fromARGB(200, 0, 0, 0),
         width: MediaQuery.of(context).size.width,
