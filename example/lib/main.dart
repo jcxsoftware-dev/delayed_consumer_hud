@@ -33,12 +33,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementSlowCounter() {
     // This will trigger the HUD
     widget.testViewModel.isBusy = true;
 
     // This simulates a long operation
     Future<void>.delayed(Duration(seconds: 2)).then((value) {
+      setState(() {
+        _counter++;
+        // When the long operation completes, hide the HUD
+        widget.testViewModel.isBusy = false;
+      });
+    });
+  }
+
+  void _incrementFastCounter() {
+    // This will trigger the HUD
+    widget.testViewModel.isBusy = true;
+
+    // This simulates a long operation
+    Future<void>.delayed(Duration(milliseconds: 100)).then((value) {
       setState(() {
         _counter++;
         // When the long operation completes, hide the HUD
@@ -56,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
             showHud: (value1) {
               return value1.isBusy;
             },
-            delayedStart: Duration(seconds: 1),
+            delayedStart: Duration(milliseconds: 200),
             child: Scaffold(
               appBar: AppBar(
                 title: Text(widget.title),
@@ -72,14 +86,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       '$_counter',
                       style: Theme.of(context).textTheme.headline4,
                     ),
+                    Divider(height: 40),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: [
+                        OutlineButton(
+                          padding: EdgeInsets.all(20),
+                          onPressed: _incrementFastCounter,
+                          child: Text('Fast operation'),
+                        ),
+                        OutlineButton(
+                          padding: EdgeInsets.all(20),
+                          onPressed: _incrementSlowCounter,
+                          child: Text('Slow operation'),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: _incrementCounter,
-                tooltip: 'Increment',
-                child: Icon(Icons.add),
-              ), // This trailing comma makes auto-formatting nicer for build methods.
             ),
           );
         });
