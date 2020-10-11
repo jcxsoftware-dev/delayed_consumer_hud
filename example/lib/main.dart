@@ -79,14 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'You have pushed the button this many times:',
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text('You have pushed the button this many times:',
+                          style: Theme.of(context).textTheme.headline6),
                     ),
                     Text(
                       '$_counter',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     Divider(height: 40),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                          'These are two operations that trigger the HUD to show up. The HUD has a 200ms delayed start. The fast operation takes 100ms and the slow operation takes 2s. Only the slow operation triggers the HUD to show up.',
+                          style: Theme.of(context).textTheme.subtitle1),
+                    ),
                     ButtonBar(
                       alignment: MainAxisAlignment.center,
                       children: [
