@@ -6,7 +6,7 @@ This HUD is useful when you perform lots of fast async calls that sometimes can 
 
 ## Demo
 
-In this demo of the [example code](https://github.com/jcxsoftware-dev/delayed_consumer_hud/blob/master/example/lib/main.dart). We configured the HUD with a start delay of 1s. It is using a provider to set the flag to show the HUD when you press the plus button. It has a Future.delay of 2s and at the end of the delay, it sets the provider's flag to false and the HUD is hidden.
+In this demo of the [example code](https://github.com/jcxsoftware-dev/delayed_consumer_hud/blob/master/example/lib/main.dart). We configured the HUD with a start delay of 1s. It is using a provider's boolean flag to show the HUD when you press the plus button. It has a Future.delay of 2s and at the end of the delay, it sets the provider's flag to false and the HUD is hidden.
 
 <img src="https://github.com/jcxsoftware-dev/delayed_consumer_hud/raw/master/doc/delayed_consumer_hud_demo.gif" width=400/>
 
@@ -104,6 +104,7 @@ One key design characteristic of this implementation is that changes to the prov
 
 ## Required Attributes
 
+<<<<<<< HEAD
 * child - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
 * showHud - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
 
@@ -113,3 +114,11 @@ One key design characteristic of this implementation is that changes to the prov
 * hud - The widget that you will draw as the HUD. The simplest example would be to use CircularProgressIndicator()
 * delayedStart - Duration that the HUD will wait before you show it. If null, it starts automatically. Ideally, consider a duration of 250ms.
 * hudWidget - This is an alternative to the hud attribute. This is a callback that lets you generate a Widget using the various providers used. This gives you additional context in case the HUD is context aware.
+=======
+* __color__ - Define the overlay color that will cover the entire screen. Ideally this widget is the root widget of your page.
+* __child__ - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
+* __hud__ - The widget that you will draw as the HUD. The simplest example would be to use CircularProgressIndicator()
+* __delayedStart__ - Duration that the HUD will wait before you show it. If null, it starts automatically. Ideally, consider a duration of 250ms.
+* __hudWidget__ - This is an alternative to the hud attribute. This is a callback that lets you generate a Widget using the various providers used. This gives you additional context in case the HUD is context aware.
+* __showHud__ - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
+>>>>>>> 07dd125f5547a6d62f6a9ce4fcc87a25537dddb7
