@@ -102,11 +102,14 @@ DelayedHud1<TestViewModel>(
 
 One key design characteristic of this implementation is that changes to the provider would not trigger a redraw of the HUD's child widget. We use a stack and the only HUD is wrapped with a consumer.
 
-## Attributes
+## Required Attributes
+
+* child - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
+* showHud - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
+
+## Optional Attributes
 
 * color - Define the overlay color that will cover the entire screen. Ideally this widget is the root widget of your page.
-* child - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
 * hud - The widget that you will draw as the HUD. The simplest example would be to use CircularProgressIndicator()
 * delayedStart - Duration that the HUD will wait before you show it. If null, it starts automatically. Ideally, consider a duration of 250ms.
 * hudWidget - This is an alternative to the hud attribute. This is a callback that lets you generate a Widget using the various providers used. This gives you additional context in case the HUD is context aware.
-* showHud - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
