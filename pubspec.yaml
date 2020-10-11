@@ -1,6 +1,6 @@
 name: delayed_consumer_hud
 description: This HUD is useful when you perform lots of fast async calls that sometimes can be slow. In these cases you only want to show a HUD is the async call happens to be slow.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 repository: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 issue_tracker: https://github.com/jcxsoftware-dev/delayed_consumer_hud/issues
