@@ -104,21 +104,12 @@ One key design characteristic of this implementation is that changes to the prov
 
 ## Required Attributes
 
-<<<<<<< HEAD
-* child - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
-* showHud - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
+* __child__ - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
+* __showHud__ - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
 
 ## Optional Attributes
 
-* color - Define the overlay color that will cover the entire screen. Ideally this widget is the root widget of your page.
-* hud - The widget that you will draw as the HUD. The simplest example would be to use CircularProgressIndicator()
-* delayedStart - Duration that the HUD will wait before you show it. If null, it starts automatically. Ideally, consider a duration of 250ms.
-* hudWidget - This is an alternative to the hud attribute. This is a callback that lets you generate a Widget using the various providers used. This gives you additional context in case the HUD is context aware.
-=======
 * __color__ - Define the overlay color that will cover the entire screen. Ideally this widget is the root widget of your page.
-* __child__ - The child that will be rendered under the HUD. Typically you want this to be a Scaffold
 * __hud__ - The widget that you will draw as the HUD. The simplest example would be to use CircularProgressIndicator()
 * __delayedStart__ - Duration that the HUD will wait before you show it. If null, it starts automatically. Ideally, consider a duration of 250ms.
 * __hudWidget__ - This is an alternative to the hud attribute. This is a callback that lets you generate a Widget using the various providers used. This gives you additional context in case the HUD is context aware.
-* __showHud__ - Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start. The timer will trigger showing the HUD widget.
->>>>>>> 07dd125f5547a6d62f6a9ce4fcc87a25537dddb7
