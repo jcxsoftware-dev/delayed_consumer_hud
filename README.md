@@ -1,5 +1,7 @@
 # HUD with delayed start and provider tigger
 
+![Package Version](https://img.shields.io/pub/v/delayed_consumer_hud)
+
 A HUD that comes with two key features, the ability to delay showing the HUD and using a provider to determine when to show the HUD.
 
 This HUD is useful when you perform lots of fast async calls that sometimes can be slow. In these cases you want to have the opportunity to show a HUD is the async call happens to be slow. An example of this could be calls to Firebase.
