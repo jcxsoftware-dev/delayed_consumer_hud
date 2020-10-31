@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.5](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/0.1.5) (2020-10-12)
+
+[Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/0.1.3...0.1.5)
+
 ## [0.1.3](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/0.1.3) (2020-10-10)
 
 [Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/20233fe7675d182208e979f9da8cd94b95c3b787...0.1.3)
