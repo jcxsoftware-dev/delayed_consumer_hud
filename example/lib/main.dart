@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
   final testViewModel = TestViewModel();
@@ -81,8 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text('You have pushed the button this many times:',
-                          style: Theme.of(context).textTheme.headline6),
+                      child: Text(
+                        'You have pushed the button this many times:',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                     ),
                     Text(
                       '$_counter',
@@ -92,19 +94,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                          'These are two operations that trigger the HUD to show up. The HUD has a 200ms delayed start. The fast operation takes 100ms and the slow operation takes 2s. Only the slow operation triggers the HUD to show up.',
-                          style: Theme.of(context).textTheme.subtitle1),
+                        'These are two operations that trigger the HUD to show up. The HUD has a 200ms delayed start. The fast operation takes 100ms and the slow operation takes 2s. Only the slow operation triggers the HUD to show up.',
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
                     ),
                     ButtonBar(
                       alignment: MainAxisAlignment.center,
                       children: [
-                        OutlineButton(
-                          padding: EdgeInsets.all(20),
+                        OutlinedButton(
                           onPressed: _incrementFastCounter,
                           child: Text('Fast operation'),
                         ),
-                        OutlineButton(
-                          padding: EdgeInsets.all(20),
+                        OutlinedButton(
                           onPressed: _incrementSlowCounter,
                           child: Text('Slow operation'),
                         )

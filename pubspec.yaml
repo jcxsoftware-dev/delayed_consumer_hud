@@ -1,18 +1,17 @@
 name: delayed_consumer_hud
 description: This HUD is useful when you perform lots of fast async calls that sometimes can be slow. In these cases you only want to show a HUD is the async call happens to be slow.
-version: 0.1.5
+version: 1.0.0
 homepage: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 repository: https://github.com/jcxsoftware-dev/delayed_consumer_hud
 issue_tracker: https://github.com/jcxsoftware-dev/delayed_consumer_hud/issues
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^4.3.2+2
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:

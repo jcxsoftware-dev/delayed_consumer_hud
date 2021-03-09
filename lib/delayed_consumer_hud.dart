@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
-  Timer _timer;
+  Timer? _timer;
   bool _showHud = false;
 
   @override
@@ -36,7 +36,7 @@ class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
     }
   }
 
-  Widget _showHudWidget(Widget hud, Color color) {
+  Widget _showHudWidget(Widget? hud, Color? color) {
     // If hud is not defined, use a container with a circular progress indicator
     if (hud == null) {
       hud = Container(
@@ -91,13 +91,13 @@ class _DelayedHudBaseState<T extends StatefulWidget> extends State<T> {
 class DelayedHud extends StatefulWidget {
   /// Constructor, only the child attribute is required.
   DelayedHud(
-      {Key key,
-      this.child,
+      {Key? key,
+      required this.child,
       this.color,
       this.hud,
       this.delayedStart,
       this.hudWidget,
-      this.showHud})
+      required this.showHud})
       : super(key: key);
 
   /// Widget that will be rendered by the HUD.
@@ -107,15 +107,15 @@ class DelayedHud extends StatefulWidget {
 
   /// This is the color used to cover the screen in between the child and the HUD control.
   /// If you don't specify this value, a translucent black color will be used.
-  final Color color;
+  final Color? color;
 
   /// Widget that is rendered when a HUD needs to be displayed.
   /// Typically this would be a CircularProgressIndicator()
-  final Widget hud;
+  final Widget? hud;
 
   /// Duration that the HUD will wait before you show it.
   /// If null, it starts automatically. Ideally, consider a duration of 250ms.
-  final Duration delayedStart;
+  final Duration? delayedStart;
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget.
@@ -125,7 +125,7 @@ class DelayedHud extends StatefulWidget {
   /// This is an alternative to the hud attribute.
   /// This is a callback that lets you generate a Widget using the various providers used.
   /// This gives you additional context in case the HUD is context aware.
-  final Widget Function() hudWidget;
+  final Widget Function()? hudWidget;
 
   @override
   _DelayedHudState createState() => _DelayedHudState();
@@ -137,8 +137,8 @@ class _DelayedHudState extends _DelayedHudBaseState<DelayedHud> {
     if (widget.showHud() == true && _timer == null) {
       print('Start Delayed Hud timer');
       if (widget.delayedStart != null &&
-          widget.delayedStart.inMicroseconds > 0) {
-        _startTimer(widget.delayedStart);
+          widget.delayedStart!.inMicroseconds > 0) {
+        _startTimer(widget.delayedStart!);
       } else {
         _showHud = true;
       }
@@ -155,7 +155,7 @@ class _DelayedHudState extends _DelayedHudBaseState<DelayedHud> {
     if (widget.hudWidget == null) {
       return _showHudWidget(widget.hud, widget.color);
     } else {
-      return widget.hudWidget();
+      return widget.hudWidget!();
     }
   }
 }
@@ -175,13 +175,13 @@ class _DelayedHudState extends _DelayedHudBaseState<DelayedHud> {
 class DelayedHud1<T1> extends StatefulWidget {
   /// Constructor, only the child attribute is required.
   DelayedHud1(
-      {Key key,
-      this.child,
+      {Key? key,
+      required this.child,
       this.color,
       this.hud,
       this.delayedStart,
       this.hudWidget,
-      this.showHud})
+      required this.showHud})
       : super(key: key);
 
   /// Widget that will be rendered by the HUD.
@@ -191,15 +191,15 @@ class DelayedHud1<T1> extends StatefulWidget {
 
   /// This is the color used to cover the screen in between the child and the HUD control.
   /// If you don't specify this value, a translucent black color will be used.
-  final Color color;
+  final Color? color;
 
   /// Widget that is rendered when a HUD needs to be displayed.
   /// Typically this would be a CircularProgressIndicator()
-  final Widget hud;
+  final Widget? hud;
 
   /// Duration that the HUD will wait before you show it.
   /// If null, it starts automatically. Ideally, consider a duration of 250ms.
-  final Duration delayedStart;
+  final Duration? delayedStart;
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
@@ -209,7 +209,7 @@ class DelayedHud1<T1> extends StatefulWidget {
   /// This is an alternative to the hud attribute.
   /// This is a callback that lets you generate a Widget using the various providers used.
   /// This gives you additional context in case the HUD is context aware.
-  final Widget Function(T1 value1) hudWidget;
+  final Widget Function(T1 value1)? hudWidget;
 
   bool _showHudProxy(
     dynamic value1,
@@ -225,7 +225,7 @@ class DelayedHud1<T1> extends StatefulWidget {
     dynamic value1,
   ) {
     if (value1 is T1) {
-      return hudWidget(value1);
+      return hudWidget!(value1);
     } else {
       throw Exception('Invalid types when calling _showHudProxy');
     }
@@ -245,8 +245,8 @@ class _DelayedHudState1<T1> extends _DelayedHudBaseState<DelayedHud1> {
           if (widget._showHudProxy(value1) == true && _timer == null) {
             print('Start Delayed Hud timer');
             if (widget.delayedStart != null &&
-                widget.delayedStart.inMicroseconds > 0) {
-              _startTimer(widget.delayedStart);
+                widget.delayedStart!.inMicroseconds > 0) {
+              _startTimer(widget.delayedStart!);
             } else {
               _showHud = true;
             }
@@ -284,31 +284,31 @@ class _DelayedHudState1<T1> extends _DelayedHudBaseState<DelayedHud1> {
 class DelayedHud2<T1, T2> extends StatefulWidget {
   /// Constructor, only the child attribute is required.
   DelayedHud2(
-      {Key key,
-      this.child,
+      {Key? key,
+      required this.child,
       this.color,
       this.hud,
       this.delayedStart,
       this.hudWidget,
-      this.showHud})
+      required this.showHud})
       : super(key: key);
 
   /// Widget that will be rendered by the HUD.
   /// Ideally this widget is a scaffold so when the HUD is rendered it covers the entire screen.
   @required
-  final Widget child;
+  final Widget? child;
 
   /// This is the color used to cover the screen in between the child and the HUD control.
   /// If you don't specify this value, a translucent black color will be used.
-  final Color color;
+  final Color? color;
 
   /// Widget that is rendered when a HUD needs to be displayed.
   /// Typically this would be a CircularProgressIndicator()
-  final Widget hud;
+  final Widget? hud;
 
   /// Duration that the HUD will wait before you show it.
   /// If null, it starts automatically. Ideally, consider a duration of 250ms.
-  final Duration delayedStart;
+  final Duration? delayedStart;
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
@@ -318,7 +318,7 @@ class DelayedHud2<T1, T2> extends StatefulWidget {
   /// This is an alternative to the hud attribute.
   /// This is a callback that lets you generate a Widget using the various providers used.
   /// This gives you additional context in case the HUD is context aware.
-  final Widget Function(T1 value1, T2 value2) hudWidget;
+  final Widget Function(T1 value1, T2 value2)? hudWidget;
 
   bool _showHudProxy(dynamic value1, dynamic value2) {
     if (value1 is T1 && value2 is T2) {
@@ -330,7 +330,7 @@ class DelayedHud2<T1, T2> extends StatefulWidget {
 
   Widget _hudWidgetProxy(dynamic value1, dynamic value2) {
     if (value1 is T1 && value2 is T2) {
-      return hudWidget(value1, value2);
+      return hudWidget!(value1, value2);
     } else {
       throw Exception('Invalid types when calling _showHudProxy');
     }
@@ -345,14 +345,13 @@ class _DelayedHudState2<T1, T2> extends _DelayedHudBaseState<DelayedHud2> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        widget.child,
+        widget.child!,
         Consumer2<T1, T2>(
             builder: (BuildContext context, value1, value2, child) {
           if (widget._showHudProxy(value1, value2) == true && _timer == null) {
-            print('Start Delayed Hud timer');
             if (widget.delayedStart != null &&
-                widget.delayedStart.inMicroseconds > 0) {
-              _startTimer(widget.delayedStart);
+                widget.delayedStart!.inMicroseconds > 0) {
+              _startTimer(widget.delayedStart!);
             } else {
               _showHud = true;
             }
@@ -390,13 +389,13 @@ class _DelayedHudState2<T1, T2> extends _DelayedHudBaseState<DelayedHud2> {
 class DelayedHud3<T1, T2, T3> extends StatefulWidget {
   /// Constructor, only the child attribute is required.
   DelayedHud3(
-      {Key key,
-      this.child,
+      {Key? key,
+      required this.child,
       this.color,
       this.hud,
       this.delayedStart,
       this.hudWidget,
-      this.showHud})
+      required this.showHud})
       : super(key: key);
 
   /// Widget that will be rendered by the HUD.
@@ -406,15 +405,15 @@ class DelayedHud3<T1, T2, T3> extends StatefulWidget {
 
   /// This is the color used to cover the screen in between the child and the HUD control.
   /// If you don't specify this value, a translucent black color will be used.
-  final Color color;
+  final Color? color;
 
   /// Widget that is rendered when a HUD needs to be displayed.
   /// Typically this would be a CircularProgressIndicator()
-  final Widget hud;
+  final Widget? hud;
 
   /// Duration that the HUD will wait before you show it.
   /// If null, it starts automatically. Ideally, consider a duration of 250ms.
-  final Duration delayedStart;
+  final Duration? delayedStart;
 
   /// Return true and the HUD widget will be shown or if there is a delayedStart defined then the timer will start.
   /// The timer will trigger showing the HUD widget. Use the value of the provider to determine if you should show the HUD or not.
@@ -424,7 +423,7 @@ class DelayedHud3<T1, T2, T3> extends StatefulWidget {
   /// This is an alternative to the hud attribute.
   /// This is a callback that lets you generate a Widget using the various providers used.
   /// This gives you additional context in case the HUD is context aware.
-  final Widget Function(T1 value1, T2 value2, T3 value3) hudWidget;
+  final Widget Function(T1 value1, T2 value2, T3? value3)? hudWidget;
 
   bool _showHudProxy(dynamic value1, dynamic value2, dynamic value3) {
     if (value1 is T1 && value2 is T2 && value3 is T3) {
@@ -436,7 +435,7 @@ class DelayedHud3<T1, T2, T3> extends StatefulWidget {
 
   Widget _hudWidgetProxy(dynamic value1, dynamic value2, dynamic value3) {
     if (value1 is T1 && value2 is T2) {
-      return hudWidget(value1, value2, value3);
+      return hudWidget!(value1, value2, value3);
     } else {
       throw Exception('Invalid types when calling _showHudProxy');
     }
@@ -463,8 +462,8 @@ class _DelayedHudState3<T1, T2, T3> extends _DelayedHudBaseState<DelayedHud3> {
               _timer == null) {
             print('Start Delayed Hud timer');
             if (widget.delayedStart != null &&
-                widget.delayedStart.inMicroseconds > 0) {
-              _startTimer(widget.delayedStart);
+                widget.delayedStart!.inMicroseconds > 0) {
+              _startTimer(widget.delayedStart!);
             } else {
               _showHud = true;
             }
