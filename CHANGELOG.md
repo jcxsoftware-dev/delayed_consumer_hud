@@ -1,16 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/HEAD)
+## [1.0.0](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/1.0.0) (2021-03-09)
 
-[Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/1.0.5...HEAD)
+[Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/0.1.3...1.0.0)
 
 **Merged pull requests:**
 
 - Add null safety support [\#1](https://github.com/jcxsoftware-dev/delayed_consumer_hud/pull/1) ([juanatjcx](https://github.com/juanatjcx))
 
-## [1.0.5](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/1.0.5) (2020-10-12)
+## [0.1.5](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/0.1.5) (2020-10-12)
 
-[Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/0.1.3...1.0.5)
+[Full Changelog](https://github.com/jcxsoftware-dev/delayed_consumer_hud/compare/1.0.0...0.1.5)
 
 ## [0.1.3](https://github.com/jcxsoftware-dev/delayed_consumer_hud/tree/0.1.3) (2020-10-10)
 
