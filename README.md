@@ -1,6 +1,7 @@
 # HUD with delayed start and provider tigger
 
 ![Package Version](https://img.shields.io/pub/v/delayed_consumer_hud)
+[![Unit testing](https://github.com/jcxsoftware-dev/delayed_consumer_hud/actions/workflows/dart.yml/badge.svg)](https://github.com/jcxsoftware-dev/delayed_consumer_hud/actions/workflows/dart.yml)
 
 A HUD that comes with two key features, the ability to delay showing the HUD and using a provider to determine when to show the HUD.
 
