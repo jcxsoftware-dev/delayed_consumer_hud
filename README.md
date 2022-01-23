@@ -11,7 +11,7 @@ This HUD is useful when you perform lots of fast async calls that sometimes can 
 
 In this demo of the [example code](https://github.com/jcxsoftware-dev/delayed_consumer_hud/blob/master/example/lib/main.dart). We configured the HUD with a start delay of 1s. It is using a provider's boolean flag to show the HUD when you press the plus button. It has a Future.delay of 2s and at the end of the delay, it sets the provider's flag to false and the HUD is hidden.
 
-![Demo](src="https://github.com/jcxsoftware-dev/delayed_consumer_hud/raw/master/doc/delayed_consumer_hud_demo.gif")
+![Demo](https://github.com/jcxsoftware-dev/delayed_consumer_hud/raw/master/doc/delayed_consumer_hud_demo.gif)
 
 ## Usage
 
